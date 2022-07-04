@@ -1,0 +1,20 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^6.3.4",
+    "fs": "^0.0.2",
+    "discord.js": "^13.6.0",
+    "node-fetch": "^3.2.4",
+    "events": "^3.3.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "license": "MIT"
+}
