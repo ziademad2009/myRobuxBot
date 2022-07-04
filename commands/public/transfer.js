@@ -4,7 +4,7 @@ const nbx = require('noblox.js');
 const { createCanvas, loadImage } = require('canvas');
 
 module.exports = {
-    // cooldown: 15,
+     cooldown: 15,
     data: new SlashCommandBuilder()
         .setName('transfer')
         .setDescription('transfer robux')

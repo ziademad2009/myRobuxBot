@@ -1,5 +1,4 @@
 
-const { TOKEN } = require('./JSON/config.json');
 const fs = require('fs');
 const guildsModels = require('./src/models/guilds');
 const userData = require('./src/models/users');
@@ -31,7 +30,7 @@ for (file of handlers) {
     require(`./handlers/${file}`)(client);
 }
 client.slashCommands(slashsFolders, './commands');
-mongoose.connect(process.env.DB || `mongodb+srv://ZIAD:NOOB@cluster0.qizpg.mongodb.net/ROBUXSYSTEM`, { 
+mongoose.connect(process.env.DB, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 }).then(result => {})
@@ -42,4 +41,4 @@ app.get('/', (req,res) => {
     res.send( '<center>' + client.user.username + '</center>')
 })
 
-client.login(TOKEN);
+client.login(process.env.Token);
