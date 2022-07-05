@@ -31,7 +31,7 @@ module.exports = {
                 }
 
 
-                await command.execute(interaction, client);
+                await command.execute(interaction, client).catch(e => {})
                 delay.set(`${command.data.name}-${interaction.user.id}`, Date.now() + (command.cooldown * 1000));
                 setTimeout(() => {
                     delay.delete(`${command.data.name}-${interaction.user.id}`);
