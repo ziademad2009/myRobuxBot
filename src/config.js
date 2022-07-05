@@ -12,6 +12,7 @@ module.exports = {
       "type": `PLAYING`,
       "name": `/help`
     }]
-  }
+  },
+  db: (password) => `mongodb+srv://ZIAD:${password}@cluster0.qizpg.mongodb.net/ROBUXSYSTEM`
   
 };
