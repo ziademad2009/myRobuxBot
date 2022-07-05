@@ -107,6 +107,11 @@ module.exports = {
    end: {
     noHave: `> **You do not have a purchase 🙄**`,
     done: `> **your Purchase ended successfully **`
+   },
+   stock: {   
+    noCookie: `> **Please select a cookie first 🙄**`,
+    noGroupId: `> **Please select a group id  🙄**`,
+ 
    }
 
 
