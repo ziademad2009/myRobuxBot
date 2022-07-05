@@ -14,9 +14,11 @@ module.exports = {
     let guildId = interaction.guild.id;   
     const replys = client.cmdReplys;
     await client.database.servers.setGuild(guildId);
-    const data = await client.database.servers.findOne({guildId});    
+    await client.database.users.setUser(interaction.author.id)
+    const data = await client.database.servers.findOne({guildId});   
+    const data2 = await client.database.users.findOne({userId: interaction.author.id})
     const codeName = interaction.options.getString("codename");
-    
+   
      
 const code = data.find(c => c.code === codeName);
 
@@ -29,14 +31,19 @@ if (code.usageBy.length === code.limit) {
  
 
 cont gifted = code.amount
-data.coins += gifted
+data2.coins += gifted
       
 const i = data.findIndex(c => c.code ===  codeName) 
-data.code[i] 
+data.code[i].usageBy.push(interaction.author.id) 
    
 
 //  await interaction.reply({content: replys.done(codeName)});
-     
+    const code2 = data.code
+     data.code = [] 
+     await data.save() 
+     data.code = code2
+     await data.save() 
+     await data2.save() 
     
     
     }
