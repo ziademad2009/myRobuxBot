@@ -29,7 +29,7 @@ module.exports = {
       usageBy: []  
       });       
    data.save()
-  await interaction.reply({content: replys.done(codeName)});
+   await interaction.reply({content: replys.done(codeName)});
      
     }
  };
