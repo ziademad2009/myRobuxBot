@@ -112,7 +112,10 @@ module.exports = {
     noCookie: `> **Please select a cookie first 🙄**`,
     noGroupId: `> **Please select a group id  🙄**`,
  
-   }
+   },
+  addcode: {
+    done: (code) => `> **done add ${code} **`
+  }
 
 
 
