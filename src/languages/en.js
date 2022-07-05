@@ -114,7 +114,8 @@ module.exports = {
  
    },
   addcode: {
-    done: (code) => `> **done add ${code} **`
+    done: (code) => `> **done add ${code} **`,
+    same: `> **cannot add the same code 🙄**`
   }
 
 

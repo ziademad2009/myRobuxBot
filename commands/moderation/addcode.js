@@ -20,16 +20,16 @@ module.exports = {
     const amount = interaction.options.getNumber('amount');
     const limit = interaction.options.getNumber('limit'); 
       
-    data.code.push({
-            code: codeName, 
-            limit: limit, 
-            amount: amount, 
-            usageBy: []  
-            });       
+    if (data.code.find(c => c.code === codeName)) return interaction.reply({content:  replys.same});   
       
+    data.code.push({
+      code: codeName, 
+      limit: limit, 
+      amount: amount, 
+      usageBy: []  
+      });       
    data.save()
-   //   interaction.reply({content: ">**done create code**"}) 
   await interaction.reply({content: replys.done(codeName)});
      
     }
- }
+ };
