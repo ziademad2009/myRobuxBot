@@ -26,7 +26,8 @@ module.exports = {
             setTimeout(() => {
                 cooldowns.delete(key);
             }, client.command.cooldown* 1000 || 3* 1000);
-            return 
+            
+            return interaction.reply({content: client.generalReplys.timeOut(client.command.cooldown || 3),  ephemeral: true});
         };
 
 

@@ -89,6 +89,20 @@ module.exports = {
     lowFunds: `> **sorry we dont have this amount of robux in group 🙄**`,
     done: (amount, account, balance) => `> **done transfer \`${amount}\` to ${account} and your current account balance is ${balance}**`,
     Receipt: (user, amount) => `${user} bought \`${amount}\`R from the group`
+   },
+   give: {
+    bot: `> **:thinking: bots do not have robux!**`,
+    done: (user, amount, user2) =>   `> **done transfer ${amount} to ${user2} from ${user} ✅**` ,
+    lowUserbalance: `> **this user balance is lower than the number that you need to remove**`,
+    isNaN: `> ** type the robux you need to give! **`
+
+   },
+   remove: {
+    bot: `> **:thinking: bots do not have robux!**`,
+    done: (user, amount, user2) =>   `> **done remove ${amount} from ${user2} by ${user} ✅**` ,
+    lowUserbalance: `> **this user balance is lower than the number that you need to remove**`,
+
+
    }
 
 
