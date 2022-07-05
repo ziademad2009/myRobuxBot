@@ -52,7 +52,7 @@ module.exports = {
         
         collector.once('end', async m => {
          client.BuyCooldown.delete(key);
-         await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
+     //    await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
            return m.delete();
         });
 
