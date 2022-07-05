@@ -30,7 +30,7 @@ if (code.usageBy.length === code.limit) {
 };
  
 
-cont gifted = code.amount
+const gifted = code.amount
 data2.coins += gifted
       
 const i = data.findIndex(c => c.code ===  codeName) 
@@ -44,7 +44,7 @@ data.code[i].usageBy.push(interaction.author.id)
      data.code = code2
      await data.save() 
      await data2.save() 
-    
+   interaction.reply({content: "done"}) 
     
     }
  };
