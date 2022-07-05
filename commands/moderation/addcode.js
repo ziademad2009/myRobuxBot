@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-   cooldown: 15,
-   data: new SlashCommandBuilder()
+ cooldown: 15,
+ data: new SlashCommandBuilder()
     .setName('addcode')
     .setDescription('add new code')
     .addStringOption(option => option.setName('codename').setDescription('Enter code name here').setRequired(true))
@@ -21,17 +21,15 @@ module.exports = {
     const limit = interaction.options.getNumber('limit'); 
       
     data.code.push({
-         guildId: {
             code: codeName, 
             limit: limit, 
             amount: amount, 
             usageBy: []  
-              }      
             });       
       
    data.save()
-      interaction.reply({content: "> done create code"}) 
-   //interaction.reply({content: replys.done(codeName)});
+   //   interaction.reply({content: ">**done create code**"}) 
+  await interaction.reply({content: replys.done(codeName)});
      
     }
  }
