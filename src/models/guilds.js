@@ -9,15 +9,14 @@ const guildsSchema = new mongoose.Schema({
   language: String,
   prefix: String,
   cookie: String,
+  code: [Object], 
   status: Boolean,
   proofchannel: String,
   thanksChannel: String,
   groupId: Number,
   price: Number,
   owner: String
-
-
-  
+ 
 });
 
 guildsSchema.statics.setLanguage = async function (guildId, language) {
