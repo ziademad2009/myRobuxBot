@@ -22,7 +22,7 @@ module.exports = {
         try {
             if (command.cooldown) {
                 if (delay.has(`${command.data.name}-${interaction.user.id}`)) {
-                    interaction.channel.send(`You can use this command again after **${ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true }).includes('ms') ? '0 second' : ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true })}**`).then(m => {
+                    return interaction.channel.send(`You can use this command again after **${ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true }).includes('ms') ? '0 second' : ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true })}**`).then(m => {
                         setTimeout(async () => {
                             m.delete()
                         }, 4000)
