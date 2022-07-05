@@ -11,6 +11,7 @@ module.exports = {
     .addNumberOption(option => option.setName('limit').setDescription('Enter a limit of users').setRequired(true)),
 
     async execute(interaction, client) {
+    if (!interaction.member.permissions.has('ADMINISTRATOR')) return interaction.reply({content: client.generalReplys.noPermissions('ADMINISTRATOR'), ephemeral: true});
       
     let guildId = interaction.guild.id;   
     const replys = client.cmdReplys;
