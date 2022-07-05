@@ -1,6 +1,7 @@
 const {language} = require('../src/config');
 const {Collection} = require('discord.js')
-const cooldowns = new Set();
+const delay = new Collection();
+const ms = require('ms');
 
 
 module.exports = {
@@ -18,29 +19,35 @@ module.exports = {
         client.generalReplys = client.languageJson.general;
         client.cmdReplys = client.languageJson[interaction.commandName];
 
-        let key = `${commandName}-${interaction.user.id}-${interaction.guild.id}`;
-
-
- 
-        if (cooldowns.has(key))  {
-            setTimeout(() => {
-                cooldowns.delete(key);
-            }, client.command.cooldown* 1000 || 3* 1000);
-            
-            return interaction.reply({content: client.generalReplys.timeOut(client.command.cooldown || 3),  ephemeral: true});
-        };
-
-
- 
         try {
-            await command.execute(interaction, client);
-            cooldowns.add(key);
-        
-    
-        } catch (error) {
+            if (command.cooldown) {
+                if (delay.has(`${command.data.name}-${interaction.user.id}`)) {
+                    interaction.channel.send(`You can use this command again after **${ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true }).includes('ms') ? '0 second' : ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true })}**`).then(m => {
+                        setTimeout(async () => {
+                            m.delete()
+                        }, 4000)
+                    })
+      
+                }
 
+
+                await command.execute(interaction, client);
+                delay.set(`${command.data.name}-${interaction.user.id}`, Date.now() + (command.cooldown * 1000));
+                setTimeout(() => {
+                    delay.delete(`${command.data.name}-${interaction.user.id}`);
+                }, command.cooldown * 1000);
+            } else {
+                await command.execute(interaction, client);
+            }
+        } catch (error) {
             console.log(error);
-            // await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
         }
+
+
+
+
+ 
+ 
     }
 }

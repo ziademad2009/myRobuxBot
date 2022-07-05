@@ -103,6 +103,10 @@ module.exports = {
     lowUserbalance: `> **this user balance is lower than the number that you need to remove**`,
 
 
+   },
+   end: {
+    noHave: `> **You do not have a purchase 🙄**`,
+    done: `> **your Purchase ended successfully **`
    }
 
 
