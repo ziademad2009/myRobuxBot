@@ -47,7 +47,7 @@ module.exports = {
             embed.setDescription(replys.done(number, data));
             embed2.setDescription(replys.delteTicket);
             await interaction.user.send({embeds: [embed]});
-           await interaction.member.roles.add(role)
+            await interaction.member.roles.add(role).catch(e => {})
             await interaction.channel.send({embeds: [embed2]});
             client.BuyCooldown.delete(key)
             return setTimeout(async () => {
