@@ -31,7 +31,7 @@ module.exports = {
         console.log(probotMessage, interaction.user.username)
 
         const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`);
-        const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
+        const collector = interaction.channel.createMessageCollector({ filter, time: 10000 });
         
         collector.on('collect', async m => {
             await client.database.users.setUser(interaction.user.id);
@@ -52,6 +52,7 @@ module.exports = {
         
         collector.once('end', async m => {
          client.BuyCooldown.delete(key);
+          if (interaction.channel)  await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
      //    await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
            return m.delete();
         });
