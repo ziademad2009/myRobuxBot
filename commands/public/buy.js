@@ -27,11 +27,12 @@ module.exports = {
         .setColor(client.embedColor)
         .setDescription(`\`\`\` #credits ${owner} ${transferPrice} \`\`\``)
       
-      await interaction.reply({embeds: [embed]})
-        console.log(probotMessage, interaction.user.username)
+      await interaction.reply({embeds: [embed]}).then(async m => {
+        
+                console.log(probotMessage, interaction.user.username)
 
         const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`);
-        const collector = interaction.channel.createMessageCollector({ filter, time: 10000 });
+        const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
         
         collector.on('collect', async m => {
             await client.database.users.setUser(interaction.user.id);
@@ -56,11 +57,15 @@ module.exports = {
      //    await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
            return m.delete();
         });
-      setTimeout(async () => {
-         client.BuyCooldown.delete(key);
-          if (interaction.channel)  await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
+      setTimeout(async (m) => {
+           interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log});
+           client.BuyCooldown.delete(key);
+           await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
+      }, 300000)
         
-      }, 1000)
+        
+      })
+
 
 
         
