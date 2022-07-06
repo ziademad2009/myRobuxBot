@@ -27,15 +27,17 @@ module.exports = {
         .setColor(client.embedColor)
         .setDescription(`\`\`\` #credits ${owner} ${transferPrice} \`\`\``)
       
-      await interaction.reply({embeds: [embed]}).then(async m => {
+       await interaction.reply({embeds: [embed]}).then(async m => {
         
-                console.log(probotMessage, interaction.user.username)
+       console.log(probotMessage, interaction.user.username)
 
         const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`);
         const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
         
         collector.on('collect', async m => {
-            if (!client.BuyCooldown.has(key)) return
+            let role = await interaction.guild.roles.cache.find(r => r.name.startsWith('-Client'));
+            if (!role) role = awa
+            if (!client.BuyCooldown.has(key)) return m.delete();
             await client.database.users.setUser(interaction.user.id);
             const data = await client.database.users.findOne({userId: interaction.user.id});
             data.coins += number;
@@ -53,16 +55,15 @@ module.exports = {
         });
         
         collector.once('end', async m => {
-         client.BuyCooldown.delete(key);
-          if (interaction.channel)  await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
-     //    await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
-           return m.delete();
+          if (!client.BuyCooldown.has(key)) return;
+          if (interaction.channel) await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log});
+          client.BuyCooldown.delete(key);
         });
-      setTimeout(async (m) => {
-           interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log});
-           client.BuyCooldown.delete(key);
-           await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
-      }, 300000)
+      // setTimeout(async (m) => {
+      //     if (!client.BuyCooldown.has(key)) return;
+      //     if (interaction.channel) await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log});
+      //      client.BuyCooldown.delete(key);
+      // }, 300000)
         
         
       })
