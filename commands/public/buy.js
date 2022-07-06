@@ -35,6 +35,7 @@ module.exports = {
         const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
         
         collector.on('collect', async m => {
+            if (!client.BuyCooldown.has(key)) return
             await client.database.users.setUser(interaction.user.id);
             const data = await client.database.users.findOne({userId: interaction.user.id});
             data.coins += number;
