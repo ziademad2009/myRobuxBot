@@ -27,7 +27,7 @@ module.exports = {
         .setColor(client.embedColor)
         .setDescription(`\`\`\` #credits ${owner} ${transferPrice} \`\`\``)
       
-      let m = await interaction.reply({embeds: [embed]});
+      await interaction.reply({embeds: [embed]})
         console.log(probotMessage, interaction.user.username)
 
         const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`);
@@ -56,6 +56,11 @@ module.exports = {
      //    await interaction.channel.send({content: replys.end, ephemeral: true}).catch(e => {console.log})
            return m.delete();
         });
+      setTimeout(async () => {
+         client.BuyCooldown.delete(key);
+          if (interaction.channel)  await interaction.reply({content: replys.end, ephemeral: true}).catch(e => {console.log})
+        
+      }, 1000)
 
 
         
