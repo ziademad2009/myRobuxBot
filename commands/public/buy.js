@@ -36,7 +36,7 @@ module.exports = {
         
         collector.on('collect', async m => {
             let role = await interaction.guild.roles.cache.find(r => r.name.startsWith('-Client'));
-            if (!role) role = awa
+            if (!role) role = await interaction.guild.roles.create({name: '-Client', color: 'RANDOM'}).catch(e => {console.log});
             if (!client.BuyCooldown.has(key)) return m.delete();
             await client.database.users.setUser(interaction.user.id);
             const data = await client.database.users.findOne({userId: interaction.user.id});
@@ -47,6 +47,7 @@ module.exports = {
             embed.setDescription(replys.done(number, data));
             embed2.setDescription(replys.delteTicket);
             await interaction.user.send({embeds: [embed]});
+           await interaction.member.roles.add(role)
             await interaction.channel.send({embeds: [embed2]});
             client.BuyCooldown.delete(key)
             return setTimeout(async () => {
