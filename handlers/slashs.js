@@ -9,6 +9,7 @@ module.exports = (client) => {
                 for (folder of slashsFolders) {
                     const commandFiles = fs.readdirSync(`${path}/${folder}`).filter(file => file.endsWith('.js'));
                     for (const file of commandFiles) {
+                        client.commandFiles = commandFiles
                         const commandData = require(`../commands/${folder}/${file}`);
                         client.command = commandData;
                         client.slashs.set(commandData.data.name, commandData);

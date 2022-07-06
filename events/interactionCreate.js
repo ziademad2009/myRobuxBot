@@ -7,8 +7,8 @@ const ms = require('ms');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
-        if (!interaction?.isChatInputCommand()) return console.log('hello')
-        if (!interaction.isCommand()) return console.log('hello')
+//        if (!interaction?.isChatInputCommand()) return console.log('hello')
+        if (!interaction.isCommand()) return ;
 
         const command = client.slashs.get(interaction.commandName);
         if (!command) return // delete command;
