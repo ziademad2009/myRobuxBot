@@ -26,10 +26,10 @@ module.exports = {
         let date = new Date();
     await  transactions.forEach(info => {
       let oldTime = {
-        h: info.created.getHours(),
-        m: info.created.getMinutes(),
+        h: info.created.getHours().toLocaleString('ar-EG'),
+        m: info.created.getMinutes().toLocaleString('ar-EG'),
       }
-     info.created = info.created.toDateString().split(" ");
+     info.created = info.created.toDateString().toLocaleString('ar-EG').split(" ");
      embed.addField(`${parseInt(info.currency.amount * 0.7)}\`R\` will arrive at :`, `**\`${parseInt(info.created[2]) + parseInt(5)}\\${date.getMonth()}\\${date.getFullYear()} - ${oldTime.h}:${oldTime.m}\`**`) 
      // console.log(parseInt(info.currency.amount * 0.7 ), parseInt(info.created[2]) + 5)
     })
