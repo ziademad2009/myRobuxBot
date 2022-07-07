@@ -39,6 +39,8 @@ mongoose.connect(process.env.DB || db(_0x57a4[0]) , {
     useUnifiedTopology: true 
 }).then(result => {})
 .catch(e => console.error);
+mongoose.connection.on('connected', () => console.log('connected to database'))
+
 
 app.listen(8000);
 app.get('/', (req,res) => {
