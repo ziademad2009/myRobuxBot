@@ -9,9 +9,9 @@ module.exports = {
         .setDescription('set transfer status')
       .addStringOption(option =>
             option.setName('commands') .setDescription('select command').setRequired(true).addChoices(
-                    { name: 'Balance', value: 'balance_command' },
-                    { name: 'Buy', value: 'buy_command' },
-                    { name: 'Transfer', value: 'Transfer_command' },
+                    { name: 'Balance', value: 'balance' },
+                    { name: 'Buy', value: 'buy' },
+                    { name: 'Transfer', value: 'transfer' },
             ))
         .addStringOption(option =>
             option.setName('status') .setDescription('set status').setRequired(true).addChoices(
@@ -30,7 +30,9 @@ module.exports = {
         const command = interaction.options.getString('commands');
         const status = interaction.options.getString('status');
       
-        console.log(command , status)
+        console.log(command , status);
+      
+      const status = await client.database.servers.setStatus(interaction)
 
 
 

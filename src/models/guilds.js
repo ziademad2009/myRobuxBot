@@ -15,7 +15,14 @@ const guildsSchema = new mongoose.Schema({
   thanksChannel: String,
   groupId: Number,
   price: Number,
-  owner: String
+  owner: String,
+  thankschannel: Number,
+  status: {
+    buy: Boolean,
+    transfer: Boolean,
+    balance: Boolean
+  }
+
  
 });
 
@@ -35,7 +42,27 @@ guildsSchema.statics.setGuild = async function (guildId) {
   if (oldData) return;
     return await this.create({ guildId});
   
+};
+guildsSchema.statics.setStatus = async function(guildId, commandname, status) {
+  
+  let data = await this.findOne({guildId});
+  
+  if (!data) data = await this.create({guildId});
+  
+  let commands = ['transfer', 'buy', 'balance'];
+  
+  if (!commandname.includes(commands)) return 'notFound';
+  
+  if (data.status[commandname] === status) return 'same';
+  
+  data.status[commandname] = status;
+  
+  data.save();
+  
+  return 'done';
+  
 }
+
 
 
 
