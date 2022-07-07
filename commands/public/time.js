@@ -25,8 +25,13 @@ module.exports = {
         .setTitle(group.name)
         let date = new Date();
     await  transactions.forEach(info => {
+      let oldTime = {
+        h: info.created.getHours(),
+        m: info.created.getMinutes(),
+      }
      info.created = info.created.toDateString().split(" ");
-     embed.addField(`${parseInt(info.currency.amount * 0.7)} will arrive at :`, `\`${parseInt(info.created[2]) + parseInt(5)}\\${date.getMonth()}\\${date.getFullYear()}\``) 
+      console.log(oldTime)
+     embed.addField(`${parseInt(info.currency.amount * 0.7)}\`R\` will arrive at :`, `**\`${parseInt(info.created[2]) + parseInt(5)}\\${date.getMonth()}\\${date.getFullYear()} - ${oldTime.h}:${oldTime.m}\`**`) 
      // console.log(parseInt(info.currency.amount * 0.7 ), parseInt(info.created[2]) + 5)
     })
       await interaction.editReply({embeds: [embed]})
