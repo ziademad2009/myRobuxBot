@@ -24,6 +24,7 @@ module.exports = {
     const username = interaction.options.getString('username');
     const data1 = await client.database.users.findOne({userId: interaction.user.id});
     const data2 = await client.database.servers.findOne({guildId: interaction.guild.id});
+    if (data2 && data2.status.balance === true) return interaction.reply({content: replys.lock, ephemeral: true });  
     if (data1.coins < number) return await interaction.editReply({content: replys.lowBalance});
      await nbx.getIdFromUsername(username).then(async user => {
      await nbx.setCookie(data2.cookie).then(async result => {

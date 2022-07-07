@@ -13,8 +13,8 @@ module.exports = {
 
     const replys = client.cmdReplys;
       
-    const data = await client.database.servers.findOne({guildId:interaction.guild.id});
-    if (data.status.balance === true) return interaction.reply
+    const guildData = await client.database.servers.findOne({guildId:interaction.guild.id});
+    if (guildData && guildData.status.balance === true) return interaction.reply({content: replys.lock, ephemeral: true });
       
     let embed = new MessageEmbed().setColor(client.embedColor)
     let user = interaction.options.getUser('target') || interaction.user;

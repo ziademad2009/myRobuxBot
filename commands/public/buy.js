@@ -10,10 +10,12 @@ module.exports = {
         .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true)),       
     async execute(interaction, client) {
         if (!interaction.channel.name.startsWith('ticket')) return;
+          
 
         const replys = client.cmdReplys;
         await client.database.servers.setGuild(interaction.guild.id);
         const data = await client.database.servers.findOne({guildId: interaction.guild.id});
+        if (data && data.status.balance === true) return interaction.reply({content: replys.lock, ephemeral: true });  
         const number = interaction.options.getNumber('amount');
         let key = `buy-${interaction.user.id}-${interaction.guild.id}`;
         if (client.BuyCooldown.has(key)) return interaction.reply({content: replys.haveOne});

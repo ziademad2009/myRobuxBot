@@ -46,7 +46,8 @@ module.exports = {
     },
     youBalance: (balance) => `> **you current balance is \`${balance}\`**`,
     userBalane: (user, balance) => `> **${user} balance is \`${balance}\`**`,
-    bot: `> **:thinking: bots do not have robux!**`
+    bot: `> **:thinking: bots do not have robux!**`,
+    lock: `> **this command is locked now 🙄 **`
   },
   setcookie: {
     info: {
@@ -77,7 +78,8 @@ module.exports = {
     done: (number, data) => `> **done transfer \`${number}\` to your account and your current account balance is \`${data.coins}\`✅**`,
     delteTicket: `> **the ticket will delete in \`10\`s ✅**`,
     end: `> **Transfer time has expired 🙄**`,
-    haveOne: `> **Already have a purchase 🙄**`
+    haveOne: `> **Already have a purchase 🙄**`,
+   lock: `> **this command is locked now 🙄 **`    
   
   },
   transfer: {
