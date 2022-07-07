@@ -15,7 +15,7 @@ module.exports = {
         const replys = client.cmdReplys;
         await client.database.servers.setGuild(interaction.guild.id);
         const data = await client.database.servers.findOne({guildId: interaction.guild.id});
-        if (data && data.status.balance === true) return interaction.reply({content: replys.lock, ephemeral: true });  
+        if (data && data.status.buy === true) return interaction.reply({content: replys.lock, ephemeral: true });  
         const number = interaction.options.getNumber('amount');
         let key = `buy-${interaction.user.id}-${interaction.guild.id}`;
         if (client.BuyCooldown.has(key)) return interaction.reply({content: replys.haveOne});

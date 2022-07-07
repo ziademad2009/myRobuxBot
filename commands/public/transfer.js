@@ -14,18 +14,15 @@ module.exports = {
     async execute(interaction, client) {
     
     const replys = client.cmdReplys;
-    await interaction.deferReply();
-
     await client.database.servers.setGuild(interaction.guild.id);
-
     await client.database.users.setUser(interaction.user.id);
-
-    const number = interaction.options.getNumber('amount');
-    const username = interaction.options.getString('username');
-    const data1 = await client.database.users.findOne({userId: interaction.user.id});
     const data2 = await client.database.servers.findOne({guildId: interaction.guild.id});
-    if (data2 && data2.status.balance === true) return interaction.reply({content: replys.lock, ephemeral: true });  
-    if (data1.coins < number) return await interaction.editReply({content: replys.lowBalance});
+    if (data2 && data2.status.transfer === true) return interaction.reply({content: replys.lock, ephemeral: true });
+     await interaction.deferReply();
+     const number = interaction.options.getNumber('amount');
+     const username = interaction.options.getString('username');
+     const data1 = await client.database.users.findOne({userId: interaction.user.id});
+     if (data1.coins < number) return await interaction.editReply({content: replys.lowBalance});
      await nbx.getIdFromUsername(username).then(async user => {
      await nbx.setCookie(data2.cookie).then(async result => {
      await nbx.getGroup(data2.groupId).then(async group => {
@@ -37,8 +34,8 @@ module.exports = {
      await nbx.groupPayout(data2.groupId, user , number).then(async() => {
      data1.coins -= number;
      data1.save();
-    let embed = new MessageEmbed().setColor(client.embedColor).setDescription(replys.done(number, username, data1.coins))
-    await interaction.editReply({embeds: [embed], ephemeral: true});
+     let embed = new MessageEmbed().setColor(client.embedColor).setDescription(replys.done(number, username, data1.coins))
+     await interaction.editReply({embeds: [embed], ephemeral: true});
 
   const proochannel = await interaction.guild.channels.cache.get(data2.proofchannel);
   if (!proochannel) return;

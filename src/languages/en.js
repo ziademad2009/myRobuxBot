@@ -90,7 +90,8 @@ module.exports = {
     newInGroup: `> **Looks like this player is new to the group and he has to wait two weeks 🙄**`,
     lowFunds: `> **sorry we dont have this amount of robux in group 🙄**`,
     done: (amount, account, balance) => `> **done transfer \`${amount}\` to ${account} and your current account balance is ${balance}**`,
-    Receipt: (user, amount) => `${user} bought \`${amount}\`R from the group`
+    Receipt: (user, amount) => `${user} bought \`${amount}\`R from the group`,
+    lock: `> **this command is locked now 🙄 **` 
    },
    give: {
     bot: `> **:thinking: bots do not have robux!**`,
