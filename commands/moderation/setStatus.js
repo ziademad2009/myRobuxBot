@@ -12,6 +12,7 @@ module.exports = {
                     { name: 'Balance', value: 'balance' },
                     { name: 'Buy', value: 'buy' },
                     { name: 'Transfer', value: 'transfer' },
+                    { name: 'all', value: 'all_commands' },
             ))
         .addStringOption(option =>
             option.setName('status') .setDescription('set status').setRequired(true).addChoices(
@@ -25,18 +26,34 @@ module.exports = {
 
         const replys = client.cmdReplys;
         await client.database.servers.setGuild(interaction.guild.id);
-        const data = await client.database.servers.findOne({guildId: interaction.guild.id});
-      
+        const data = await client.database.servers.findOne({guildId: interaction.guild.id});   
         const command = interaction.options.getString('commands');
         const status = interaction.options.getString('status');
       
-        console.log(command , status);
-      data.status = true;
+  
+      let statusType;  
+      if (status === 'lock_status') statusType = true;
+      if (status === 'unLock_status') statusType = false;
+      
+      if (command === 'all_commands') {
+      console.log('all', status)
+      data.status.transfer = statusType;
+      data.status.buy = statusType;
+      data.status.balance = statusType
+      data.save();
+        
+      interaction.reply({content: replys.})
+    
+      return console.log(data.status)
+        
+      }
+        
+      data.status[command] = statusType
       data.save();
       
-      // const commandsData = await client.database.servers.setStatus(interaction.guild.id, command, true);
      interaction.reply("done")
-      console.log(data)
+    
+    console.log(data.status)
 
 
 
