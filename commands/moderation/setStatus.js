@@ -31,8 +31,12 @@ module.exports = {
         const status = interaction.options.getString('status');
       
         console.log(command , status);
+      data.status = true;
+      data.save();
       
-      const status = await client.database.servers.setStatus(interaction)
+      // const commandsData = await client.database.servers.setStatus(interaction.guild.id, command, true);
+     interaction.reply("done")
+      console.log(data)
 
 
 
