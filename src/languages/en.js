@@ -117,7 +117,11 @@ module.exports = {
     noCookie: `> **Please select a cookie first 🙄**`,
     noGroupId: `> **Please select a group id  🙄**`,
  
-   }
+   },
+  setstatus: {
+    doneAll: (status) => (status === true)? '> **done \`lock\` all command**' : '> **done \`unlock\` all commands**',
+    done: (command, status) => (status === true)? `> **done lock \`${command}\` command**` : `> **done unlock \`${command}\` command**`
+  }
 
 
 

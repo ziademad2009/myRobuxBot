@@ -12,6 +12,10 @@ module.exports = {
     async execute(interaction, client) {
 
     const replys = client.cmdReplys;
+      
+    const data = await client.database.servers.findOne({guildId:interaction.guild.id});
+    if (data.status.balance === true) return interaction.reply
+      
     let embed = new MessageEmbed().setColor(client.embedColor)
     let user = interaction.options.getUser('target') || interaction.user;
     if (user.bot) return interaction.reply({content: replys.bot})
