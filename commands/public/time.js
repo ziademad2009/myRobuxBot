@@ -22,7 +22,7 @@ module.exports = {
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
         .setTitle(group.name)
-        .setFooter(`total robux: ${revenue.pendingRobux}`)
+        .setFooter({text:`total robux: ${revenue.pendingRobux}`})
         let date = new Date();
     await  transactions.forEach(info => {
       let oldTime = {
