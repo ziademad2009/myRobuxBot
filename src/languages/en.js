@@ -113,10 +113,11 @@ module.exports = {
     noGroupId: `> **Please select a group id  🙄**`,
  
    },
-  addcode: {
-    done: (code) => `> **done add ${code} **`,
-    same: `> **cannot add the same code 🙄**`
-  }
+   time: {   
+    noCookie: `> **Please select a cookie first 🙄**`,
+    noGroupId: `> **Please select a group id  🙄**`,
+ 
+   }
 
 
 

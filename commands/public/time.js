@@ -30,7 +30,7 @@ module.exports = {
         m: info.created.getMinutes().toLocaleString('ar-EG'),
       }
      info.created = info.created.toDateString().toLocaleString('ar-EG').split(" ");
-     embed.addField(`${parseInt(info.currency.amount * 0.7)}\`R\` will arrive at :`, `**\`${parseInt(info.created[2]) + parseInt(5)}\\${date.getMonth()}\\${date.getFullYear()} - ${oldTime.h}:${oldTime.m}\`**`) 
+     embed.addField(`${parseInt(info.currency.amount * 0.7)}\`R\` will arrive at :`, `**\`${parseInt(info.created[2]) + parseInt(5)}\\${+date.getMonth() + +1}\\${date.getFullYear()} - ${oldTime.h}:${oldTime.m}\`**`) 
      // console.log(parseInt(info.currency.amount * 0.7 ), parseInt(info.created[2]) + 5)
     })
       await interaction.editReply({embeds: [embed]})

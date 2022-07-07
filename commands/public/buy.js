@@ -51,7 +51,7 @@ module.exports = {
             await interaction.channel.send({embeds: [embed2]});
             client.BuyCooldown.delete(key)
             return setTimeout(async () => {
-               interaction.channel.delete() || interaction.channel.permissionOverwrites.edit(interaction.user, { VIEW_CHANNEL: false }).catch(e => {console.log}); 
+            if (interaction.channel) interaction.channel.delete() || interaction.channel.permissionOverwrites.edit(interaction.user, { VIEW_CHANNEL: false }).catch(e => {console.log}); 
             }, 10*5000);
         });
         
