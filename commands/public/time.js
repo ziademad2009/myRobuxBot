@@ -9,8 +9,6 @@ module.exports = {
         .setDescription('know robux arrive time'),
         
     async execute(interaction, client) {
-        if (!interaction.member.permissions.has('ADMINISTRATOR')) return interaction.reply({content: client.generalReplys.noPermissions('ADMINISTRATOR'), ephemeral: true});
-
 
         const replys = client.cmdReplys;
         await interaction.deferReply();
@@ -20,9 +18,11 @@ module.exports = {
         await nbx.getGroup(data.groupId).then(async group => {
         let transactions = await nbx.getGroupTransactions(data.groupId, "Sale");
         transactions = transactions.filter(r => r.isPending === true);
+          let revenue = await nbx.getGroupRevenueSummary(data.groupId, "Year");
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
         .setTitle(group.name)
+        .setFooter(`total robux: ${revenue.pendingRobux}`)
         let date = new Date();
     await  transactions.forEach(info => {
       let oldTime = {
@@ -30,7 +30,6 @@ module.exports = {
         m: info.created.getMinutes(),
       }
      info.created = info.created.toDateString().split(" ");
-      console.log(oldTime)
      embed.addField(`${parseInt(info.currency.amount * 0.7)}\`R\` will arrive at :`, `**\`${parseInt(info.created[2]) + parseInt(5)}\\${date.getMonth()}\\${date.getFullYear()} - ${oldTime.h}:${oldTime.m}\`**`) 
      // console.log(parseInt(info.currency.amount * 0.7 ), parseInt(info.created[2]) + 5)
     })
