@@ -28,9 +28,9 @@ module.exports = {
         
 			);
        
-       		await interaction.reply({  components: [row] }).then(async m => {
-            
-            setTimeout(() => m.delete, 100000)
+       	const m =	await interaction.reply({  components: [row] })
+           
+        
             
          
        
@@ -39,12 +39,11 @@ module.exports = {
      const collector = interaction.channel.createMessageComponentCollector({ filter, time: 100000 });
 
     collector.on('collect', async i => {
+
      
 	    if (i.customId === 'info') {
-        
         let information = await nbx.getPlayerInfo({userId: userId})
         let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "body")
-
         
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
@@ -62,6 +61,8 @@ module.exports = {
       };
      
     if (i.customId === 'avatar') {
+
+        cooldown.add(interaction.user.id)
       
       let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "Headshot")
       
@@ -77,7 +78,7 @@ module.exports = {
 
 collector.on('end', m => {});
 
-})
+
        
 }).catch(e => interaction.reply({content: 'i cant find this user'}))
    
