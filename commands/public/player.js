@@ -28,19 +28,11 @@ module.exports = {
         
 			);
        
-       	const m =	await interaction.reply({  components: [row] })
-           
-        
-            
-         
-       
-      const filter = i =>  i.user.id === interaction.user.id;
-
-     const collector = interaction.channel.createMessageComponentCollector({ filter, time: 100000 });
-
-    collector.on('collect', async i => {
-
-     
+        const m =	await interaction.reply({  components: [row] }) 
+        const filter = i =>  i.user.id === interaction.user.id;
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 100000 });
+collector.on('collect', async i => {
+  
 	    if (i.customId === 'info') {
         let information = await nbx.getPlayerInfo({userId: userId})
         let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "body")
@@ -54,18 +46,12 @@ module.exports = {
         .addField(`**friendCount**`, `${information.friendCount}`, true)
         .addField(`**followerCount**`, `${information.followerCount}`, true)
         .setImage(thumbnail_default[0].imageUrl)
-     
-        
-		 await i.update({embeds: [embed]});
+        await i.update({embeds: [embed]});
 	    
       };
      
     if (i.customId === 'avatar') {
-
-        cooldown.add(interaction.user.id)
-      
-      let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "Headshot")
-      
+      let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "Headshot")      
       let embed = new MessageEmbed()
       .setColor(client.embedColor)
       .setTitle(username)
