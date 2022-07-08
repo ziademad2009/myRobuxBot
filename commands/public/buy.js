@@ -27,13 +27,14 @@ module.exports = {
 
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
-        .setDescription(`\`\`\` #credits ${owner} ${transferPrice} \`\`\``)
+        .setTitle(`اختر شخص واحد لتحول له كريدت`)
+        .setDescription(`\`\`\` #credits ${owner} ${transferPrice} \`\`\` \n\`\`\`#credits 867536376974540821 ${transferPrice} \`\`\``)
       
        await interaction.reply({embeds: [embed]}).then(async m => {
         
        //console.log(probotMessage, interaction.user.username)
 
-        const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`);
+        const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`) || m.content.includes(`<@!867536376974540821>`);
         const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
         
         collector.on('collect', async m => {
