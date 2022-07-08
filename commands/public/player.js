@@ -30,7 +30,7 @@ module.exports = {
        
        		await interaction.reply({  components: [row] }).then(async m => {
             
-            setTimeout(() => m.delelte, 100000)
+            setTimeout(() => m.delete, 100000)
             
          
        
@@ -43,15 +43,21 @@ module.exports = {
 	    if (i.customId === 'info') {
         
         let information = await nbx.getPlayerInfo({userId: userId})
+        let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "body")
 
         
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
         .setTitle(`${username} info`)
         .setURL(`https://www.roblox.com/users/${userId}/profile`)
-        .addField(`****`)
+        .addField(`**displayName**`, `${information.displayName}`, true)
+        .addField(`**joinDate**`, `${information.joinDate}`, true)
+        .addField(`**friendCount**`, `${information.friendCount}`, true)
+        .addField(`**followerCount**`, `${information.followerCount}`, true)
+        .setImage(thumbnail_default[0].imageUrl)
+     
         
-		 //await i.update({ content: 'player info' });
+		 await i.update({embeds: [embed]});
 	    
       };
      
