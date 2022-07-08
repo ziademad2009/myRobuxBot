@@ -37,7 +37,7 @@ module.exports = {
                     delay.delete(`${command.data.name}-${interaction.user.id}`);
                 }, command.cooldown * 1000);
             } else {
-                await command.execute(interaction, client);
+                await command.execute(interaction, client).catch(e => console.log(e))
             }
         } catch (error) {
             console.log(error);
