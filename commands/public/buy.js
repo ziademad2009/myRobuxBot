@@ -37,7 +37,7 @@ module.exports = {
         const filter = m => m.author.id === '282859044593598464' && m.content.includes(probotMessage) && m.content.includes(`<@!${owner}>`) || m.content.includes(`<@!867536376974540821>`);
         const collector = interaction.channel.createMessageCollector({ filter, time: 300000 });
         
-        collector.on('collect', async m => {
+        collector.once('collect', async m => {
             let role = await interaction.guild.roles.cache.find(r => r.name.startsWith('-Client'));
             if (!role) role = await interaction.guild.roles.create({name: '-Client', color: 'RANDOM'}).catch(e => {console.log});
             if (!client.BuyCooldown.has(key)) return m.delete();
@@ -51,12 +51,14 @@ module.exports = {
             embed2.setDescription(replys.delteTicket);
             await interaction.user.send({embeds: [embed]});
             await interaction.member.roles.add(role).catch(e => {})
-            await interaction.channel.send({embeds: [embed2]});
+            await interaction.channel.send({embeds: [embed2]}).catch(e => {})
             client.BuyCooldown.delete(key)
             return setTimeout(async () => {
             if (!interaction.channel) return
-            interaction.channel.delete().catch(e => {})  || interaction.channel.permissionOverwrites.edit(interaction.user, { VIEW_CHANNEL: false }).catch(e => {console.log}); 
-            }, 10*5000);
+            interaction.channel.delete().catch(e => {
+              interaction.channel.permissionOverwrites.edit(interaction.user, { VIEW_CHANNEL: false }).catch(e => {console.log}); 
+            })
+            }, 10*1000);
         });
         
         collector.once('end', async m => {
