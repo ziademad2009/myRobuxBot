@@ -21,7 +21,8 @@ const guildsSchema = new mongoose.Schema({
     buy: Boolean,
     transfer: Boolean,
     balance: Boolean
-  }
+  },
+  logsChannel: String
 
  
 });

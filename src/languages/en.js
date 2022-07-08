@@ -124,7 +124,10 @@ module.exports = {
   setstatus: {
     doneAll: (status) => (status === true)? '> **done \`lock\` all command**' : '> **done \`unlock\` all commands**',
     done: (command, status) => (status === true)? `> **done lock \`${command}\` command**` : `> **done unlock \`${command}\` command**`
-  }
+  },
+  setlogschannel: {
+    done:  (channel) => `> **done set <#${channel}> as logs channel ✅**`
+  },
 
 
 
