@@ -30,16 +30,28 @@ module.exports = {
        
        		await interaction.reply({  components: [row] }).then(async m => {
             
+            setTimeout(() => m.delelte, 100000)
+            
          
        
       const filter = i =>  i.user.id === interaction.user.id;
 
-     const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+     const collector = interaction.channel.createMessageComponentCollector({ filter, time: 100000 });
 
     collector.on('collect', async i => {
      
 	    if (i.customId === 'info') {
-		  await i.update({ content: 'player info' });
+        
+        let information = await nbx.getPlayerInfo({userId: userId})
+
+        
+        let embed = new MessageEmbed()
+        .setColor(client.embedColor)
+        .setTitle(`${username} info`)
+        .setURL(`https://www.roblox.com/users/${userId}/profile`)
+        .addField(`****`)
+        
+		 //await i.update({ content: 'player info' });
 	    
       };
      
@@ -57,9 +69,9 @@ module.exports = {
 	   }
   });
 
-collector.on('end', collected => m.delete());
+collector.on('end', m => {});
 
-  })
+})
        
 }).catch(e => interaction.reply({content: 'i cant find this user'}))
    
