@@ -28,7 +28,9 @@ module.exports = {
         
 			);
        
-       		await interaction.reply({  components: [row] });
+       		await interaction.reply({  components: [row] }).then(async m => {
+            
+         
        
       const filter = i =>  i.user.id === interaction.user.id;
 
@@ -43,19 +45,23 @@ module.exports = {
      
     if (i.customId === 'avatar') {
       
-      let thumbnail_default = await nbx.getPlayerThumbnail(userId)
+      let thumbnail_default = await nbx.getPlayerThumbnail(userId, 420, "png", true, "Headshot")
       
       let embed = new MessageEmbed()
       .setColor(client.embedColor)
+      .setTitle(username)
+      .setURL(`https://www.roblox.com/users/${userId}/profile`)
       .setImage(thumbnail_default[0].imageUrl)
 		   await i.update({ embeds: [embed] });
       
 	   }
   });
 
-collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+collector.on('end', collected => m.delete());
+
+  })
        
-     }).catch(e => interaction.reply({content: 'i cant find this user'}))
+}).catch(e => interaction.reply({content: 'i cant find this user'}))
    
 
 
