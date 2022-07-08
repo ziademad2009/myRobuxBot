@@ -66,7 +66,7 @@ collector.on('end', m => {});
 
 
        
-}).catch(e => interaction.reply({content: 'i cant find this user'}))
+}).catch(e => interaction.reply({content: 'i cant find this user'}));
    
 
 
