@@ -2,6 +2,13 @@ const noblox = require('noblox.js');
 const data = require('../src/models/guilds');
 const {server} = require('../src/config');
 const userData = require('../src/models/pendingUsers')
+
+const date = new Date();
+
+
+let fullDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
+console.log(fullDate)
+
 setup()
 async function setup()  {
   
@@ -19,7 +26,7 @@ const guildData = await data.findOne({guildId: '950871215856316437'});
  
  evt.emit('handle', request, true, async  () => { 
    
-   userData.addUser(guildData.groupId, id, '1', '1')
+   await userData.addUser(guildData.groupId, id, '1', '1');
    console.log(`Welcome ${id} to the group`);
  });
  
