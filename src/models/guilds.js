@@ -9,7 +9,7 @@ const guildsSchema = new mongoose.Schema({
   language: String,
   prefix: String,
   cookie: String,
-  code: [Object], 
+  pendingUsers: [Object], 
   status: Boolean,
   proofchannel: String,
   thanksChannel: String,
@@ -44,25 +44,7 @@ guildsSchema.statics.setGuild = async function (guildId) {
     return await this.create({ guildId});
   
 };
-guildsSchema.statics.setStatus = async function(guildId, commandname, status) {
-  
-  let data = await this.findOne({guildId});
-  
-  if (!data) data = await this.create({guildId});
-  
-  let commands = ['transfer', 'buy', 'balance'];
-  
-  if (!commandname.includes(commands)) return 'notFound';
-  
-  if (data.status[commandname] === status) return 'same';
-  
-  data.status[commandname] = status;
-  
-  data.save();
-  
-  return 'done';
-  
-}
+
 
 
 
