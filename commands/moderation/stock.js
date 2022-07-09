@@ -26,7 +26,7 @@ module.exports = {
         let embed = new MessageEmbed()
         .setColor(client.embedColor)
         .setTitle(group.name)
-        .setDescription(`**## Total Robux : (\`${funds}\`) \n\ ## Pending Robux : (\`${revenue.pendingRobux}\`) **`);
+        .setDescription(`** - Total Robux : (\`${funds}\`) \n\ - Pending Robux : (\`${revenue.pendingRobux}\`) **`);
 
         interaction.reply({embeds: [embed]})
 
