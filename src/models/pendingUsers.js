@@ -8,11 +8,11 @@ const pendingSchema = new mongoose.Schema({
   
 });
 
-pendingSchema.statics.addUser = async function (groupId, userId, joinTime, endTime) {
-  if (!groupId || !userId || !joinTime || !endTime)  throw new Error('invalid groupId, userId, joinTime, endTime');
+pendingSchema.statics.addUser = async function (groupId, userId, joinTime) {
+  if (!groupId || !userId || !joinTime )  throw new Error('invalid groupId, userId, joinTime');
   const user = await this.findOne({groupId, userId});
-  if (user) await user.updateOne({joinTime, endTime});
-  else await this.create({groupId, userId, joinTime, endTime}).catch(e => {console.error});
+  if (user) await user.updateOne({joinTime});
+  else await this.create({groupId, userId, joinTime}).catch(e => {console.error});
   
 
 }
