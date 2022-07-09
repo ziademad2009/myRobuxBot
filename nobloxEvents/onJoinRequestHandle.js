@@ -17,6 +17,7 @@ const guildData = await data.findOne({guildId: '950871215856316437'});
  let evt =  await noblox.onJoinRequestHandle(guildData.groupId);
  evt.on('data', async  (request) => {
  // console.log(request.requester.username);
+   if (request.requester.username === 'slh6rdsj') return
  const id = await noblox.getIdFromUsername(request.requester.username);
  evt.emit('handle', request, true, async  () => { 
    await userData.addUser(guildData.groupId, id, `${date}`);
