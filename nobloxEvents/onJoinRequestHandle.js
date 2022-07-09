@@ -21,6 +21,10 @@ const guildData = await data.findOne({guildId: '950871215856316437'});
  evt.emit('handle', request, true, async  () => { 
    await userData.addUser(guildData.groupId, id, `${date}`);
  });
+   
+evt.on("error", async (err) => {
+  
+})
  
 
 });
