@@ -9,7 +9,7 @@ const guildsSchema = new mongoose.Schema({
   language: String,
   prefix: String,
   cookie: String,
-  pendingUsers: [Object], 
+
   status: Boolean,
   proofchannel: String,
   thanksChannel: String,

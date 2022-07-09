@@ -1,14 +1,15 @@
 const noblox = require('noblox.js');
 const data = require('../src/models/guilds');
 const {server} = require('../src/config');
-
-(async () => {
+const userData = require('../src/models/pendingUsers')
+setup()
+async function setup()  {
   
-const data = await data.findOne({guildId: '950871215856316437'});
+const guildData = await data.findOne({guildId: '950871215856316437'});
   
- await noblox.setCookie(data.cookie).then(async result => {
+ await noblox.setCookie(guildData.cookie).then(async result => {
    
- let evt =  await noblox.onJoinRequestHandle(data.groupId);
+ let evt =  await noblox.onJoinRequestHandle(guildData.groupId);
    
  evt.on('data', async  (request) => {
    
@@ -16,7 +17,9 @@ const data = await data.findOne({guildId: '950871215856316437'});
    
  const id = await noblox.getIdFromUsername(request.requester.username);
  
- evt.emit('handle', request, true, function () {  
+ evt.emit('handle', request, true, async  () => { 
+   
+   userData.addUser(guildData.groupId, id, '1', '1')
    console.log(`Welcome ${id} to the group`);
  });
  
@@ -28,4 +31,4 @@ const data = await data.findOne({guildId: '950871215856316437'});
   console.log('logged to '+result.UserName)
  }).catch(e => {console.log(`login with cookie and group first`)})
 
-})();
+};
