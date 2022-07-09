@@ -22,11 +22,14 @@ module.exports = {
              groups.forEach(group => {
                groupsArray.push(parseInt(group));
              })
-           })
+           });
+           
            if (!groupsArray.includes(data.groupId)) return interaction.channel.send({content: `> **this user is not in the group**`, ephemeral: true})
-          const usersData =  await pendingData.findOne({userId: id, groupId: data.groupId});
-           if (!usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`});
-           let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **${usersData.joinTime}**`)
+          
+           //const usersData =  await pendingData.findOne({userId: id, groupId: data.groupId});
+           //if (!usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`});
+           //let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **${usersData.joinTime}**`);
+           
          }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
     
  }
