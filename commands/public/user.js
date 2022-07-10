@@ -15,9 +15,9 @@ module.exports = {
       
         const username = interaction.options.getString('username');
       
-       await noblox.getIdFromUsername(username).then(async (id) => {
+           const id = await noblox.getIdFromUsername(username)
          
-           await client.database.servers.setGuild(interaction.guild.id);
+            await client.database.servers.setGuild(interaction.guild.id);
       
            const data = await client.database.servers.findOne({guildId: interaction.guild.id});
       
@@ -32,19 +32,19 @@ module.exports = {
              })
              
            });
-      console.log(groupsArray)
+          console.log(groupsArray)
            
            if (!groupsArray.includes(data.groupId)) return interaction.reply({content: `> **this user is not in the group**`, ephemeral: true})
           
            const usersData =  await pendingData.findOne({userId: id, groupId: data.groupId});
       
-           if (!usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`});
+           if (!usersData || !usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`, ephemeral: true});
       
            let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **${usersData.joinTime}**`);
       
            interaction.reply({embeds: [embed], ephemeral: true});
            
-          }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
+        //  }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
     
  }
 };

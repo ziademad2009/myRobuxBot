@@ -4,7 +4,7 @@ const {server} = require('../src/config');
 const userData = require('../src/models/pendingUsers')
 
 let date = new Date();
-date = date.toLocaleString('ar-EG')
+date = date.toLocaleString('en-EG')
 
 
 // let fullDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
@@ -12,7 +12,7 @@ console.log(date)
 
 setup()
 async function setup()  {
-const guildData = await data.findOne({guildId: '950871215856316437'});
+const guildData = await data.findOne({guildId: '904487912408764536'});
  await noblox.setCookie(guildData.cookie).then(async result => {
  let evt =  await noblox.onJoinRequestHandle(guildData.groupId);
  evt.on('data', async  (request) => {
@@ -28,9 +28,9 @@ evt.on("error", async (err) => {
 })
  
 
-});
+})
 
   console.log('logged to '+result.UserName)
- }).catch(e => {console.log(`login with cookie and group first`)})
+ }).catch(e => {console.log(e), console.log(`login with cookie and group first`)})
 
 };

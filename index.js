@@ -1,4 +1,4 @@
-//require('./nobloxEvents/onJoinRequestHandle')
+require('./nobloxEvents/onJoinRequestHandle')
 const fs = require('fs');
 const guildsModels = require('./src/models/guilds');
 const userData = require('./src/models/users');
