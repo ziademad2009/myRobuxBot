@@ -43,7 +43,7 @@ module.exports = {
       
            let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **joined in :** \n\ \`${usersData.joinTime}\``)
       
-           interaction.reply({embeds: [embed], ephemeral: true});
+           interaction.reply({embeds: [embed]});
               
 
          // }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
