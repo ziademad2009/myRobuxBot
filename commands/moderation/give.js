@@ -31,8 +31,6 @@ module.exports = {
             ephemeral: true
         });
         await client.database.users.setUser(user.id);
-        await client.database.servers.setGuild(interaction.guild.id);
-        const guildData = client.database.servers.setGuild({guildId: interaction.guild.id});
         const data = await client.database.users.findOne({
             userId: user.id
         });
@@ -44,7 +42,6 @@ module.exports = {
         interaction.editReply({
             embeds: [embed]
         });
-        const proofChannel = interaction.guild.channels.cache.get(guildData.logsChannel);
     
 
     }

@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const guildsSchema = new mongoose.Schema({
-  guildId: {
-    type: String,
-    required: true,
-    unique: true
-  },
+  guildId: String,
   language: String,
   prefix: String,
   cookie: String,
