@@ -1,10 +1,9 @@
 
-
 module.exports = {
+  prefix: '!',
   language: 'en',
   owners: ["860865950945378325"],
   token: '',
-  password: 'NOOB',
   embedColor: `BLUE`,
   "presence": {
     "status": `dnd`,
