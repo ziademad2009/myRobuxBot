@@ -18,7 +18,7 @@ try{
    await userData.addUser(guildData.groupId, id, `${date}`);
  });
 evt.on('error', async error => {
-console.log(error)
+console.log('error')
 })
 })
 }catch(error) {
