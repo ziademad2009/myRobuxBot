@@ -18,6 +18,7 @@ const client = new Client({
 });
 
 client.slashs = new Collection();
+client.commands = new Collection();
 client.database = {
     servers: guildsModels,
     users: userData
@@ -31,6 +32,13 @@ for (file of handlers) {
     require(`./handlers/${file}`)(client);
 }
 client.slashCommands(slashsFolders, './commands');
+
+const messageCommands = fs.readdirSync('./messageCommands').filter(file => file.endsWith('.js'));
+
+for (commandFile of messageCommands) {
+  const command = require(`./messageCommands/${commandFile}`);
+  client.commands.set(command.name, command);
+}
 
 var _0x57a4=["\x4E\x4F\x4F\x42"];
 
