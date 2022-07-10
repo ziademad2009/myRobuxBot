@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 
 module.exports = {
-    cooldown: 15,
+   // cooldown: 15,
     data: new SlashCommandBuilder()
         .setName('balance')
         .setDescription('see your balance or user balance or trade balance with user.')
@@ -28,6 +28,7 @@ module.exports = {
     };
     if (number) {
       let user = interaction.options.getUser('target');
+      if (!user) return interaction.reply({content: `> **i cant find ${number}**`})
       if (user.bot) return interaction.reply({content: replys.bot})
       await client.database.users.setUser(user.id);
       await client.database.users.setUser(interaction.user.id);
