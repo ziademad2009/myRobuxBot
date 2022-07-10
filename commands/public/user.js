@@ -16,7 +16,8 @@ module.exports = {
         const username = interaction.options.getString('username');
       
            const id = await noblox.getIdFromUsername(username)
-         
+           if (!id) return interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true})
+                
             await client.database.servers.setGuild(interaction.guild.id);
       
            const data = await client.database.servers.findOne({guildId: interaction.guild.id});
@@ -40,11 +41,12 @@ module.exports = {
       
            if (!usersData || !usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`, ephemeral: true});
       
-           let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **joined in :\n\ ${usersData.joinTime}**`)
+           let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **joined in :** \n\ \`${usersData.joinTime}\``)
       
            interaction.reply({embeds: [embed], ephemeral: true});
-           
-        //  }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
+              
+
+         // }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
     
  }
 };
