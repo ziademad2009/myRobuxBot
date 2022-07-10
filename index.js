@@ -11,6 +11,7 @@ const app = express();
 const {db} = require('./src/config')
 
 const client = new Client({
+  allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
     intents: [
         discord.Intents.FLAGS.GUILDS,
         discord.Intents.FLAGS.GUILD_MESSAGES,
