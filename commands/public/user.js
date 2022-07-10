@@ -32,7 +32,7 @@ module.exports = {
              })
              
            });
-          console.log(groupsArray)
+         // console.log(groupsArray)
            
            if (!groupsArray.includes(data.groupId)) return interaction.reply({content: `> **this user is not in the group**`, ephemeral: true})
           
@@ -40,7 +40,7 @@ module.exports = {
       
            if (!usersData || !usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`, ephemeral: true});
       
-           let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **${usersData.joinTime}**`);
+           let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **joined in :\n\ ${usersData.joinTime}**`)
       
            interaction.reply({embeds: [embed], ephemeral: true});
            
