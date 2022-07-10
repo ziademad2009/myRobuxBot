@@ -14,15 +14,25 @@ module.exports = {
     async execute(interaction, client) {
       
         const username = interaction.options.getString('username');
-         await noblox.getIdFromUsername(username).then(async (id) => {
+      
+         const id = await noblox.getIdFromUsername(username)
+         
            await client.database.servers.setGuild(interaction.guild.id);
+      
            const data = await client.database.servers.findOne({guildId: interaction.guild.id});
+      
            const groupsArray = [];
+      
            await noblox.getGroups(id).then(groups => {
+             
              groups.forEach(group => {
-               groupsArray.push(parseInt(group));
+               
+               groupsArray.push(group.Id);
+               
              })
+             
            });
+      console.log(groupsArray)
            
            if (!groupsArray.includes(data.groupId)) return interaction.channel.send({content: `> **this user is not in the group**`, ephemeral: true})
           
@@ -30,7 +40,7 @@ module.exports = {
            //if (!usersData.joinTime) return interaction.reply({content: `> **look like you are in the group and you can use transfer command**`});
            //let embed = new MessageEmbed().setColor(client.embedColor).setDescription(`> **${usersData.joinTime}**`);
            
-         }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
+         // }).catch(e => console.log(e), interaction.reply({content: '> **i cant find this user in roblox**', ephemeral: true}))
     
  }
 };
