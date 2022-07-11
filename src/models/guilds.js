@@ -18,7 +18,8 @@ const guildsSchema = new mongoose.Schema({
     transfer: Boolean,
     balance: Boolean
   },
-  logsChannel: String
+  logsChannel: String,
+  boostRole: String
 
  
 });

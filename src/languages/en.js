@@ -128,6 +128,9 @@ module.exports = {
   setlogschannel: {
     done:  (channel) => `> **done set <#${channel}> as logs channel ✅**`
   },
+  setboostrole: {
+  done: (role) => `> **done set <@&${role}> as the boost role**`
+}
 
 
 
