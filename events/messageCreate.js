@@ -12,11 +12,15 @@ const command = client.commands.get(commandName);
   client.languageJson = require('../src/languages/' + client.language);
   client.generalReplys = client.languageJson.general;
   client.cmdReplys = client.languageJson[commandName];
+  await client.database.servers.setGuild(message.guild.id);
+  await client.database.users.setUser(message.author.id);
   const sdb = await client.database.servers.findOne({guildId: message.guild.id});
   const db = await client.database.users.findOne({userId: message.author.id});
   if (sdb.boostRole) {
-    if (!message.member.roles.cache.has(sdb.boostRole)) return message.reply({content :client.generalReplys.premiumOnly});
-    if (message.aut)
+    if (!message.member.roles.cache.has(sdb.boostRole)) {
+      if (db.booster === true) await db.updateOne({booster: false});
+      return message.reply({content :client.generalReplys.premiumOnly});
+    }
   };
 
 try {
