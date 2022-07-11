@@ -9,7 +9,7 @@ module.exports = {
     "status": `dnd`,
     "activities": [{
       "type": `PLAYING`,
-      "name": `/help`
+      "name": `/help | !help`
     }]
   },
   db: (password) => `mongodb+srv://ZIAD:${password}@cluster0.qizpg.mongodb.net/ROBUXSYSTEM`
