@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const usersSchema = new mongoose.Schema({
   userId: String,
   coins: {type: Number, default:0},
+  booster: Boolean,
 
 
   
