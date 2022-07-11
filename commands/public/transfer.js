@@ -39,6 +39,7 @@ module.exports = {
 
   const proochannel = await interaction.guild.channels.cache.get(data2.proofchannel);
   if (!proochannel) return;
+    let balanceing = await nbx.getGroupFunds(data2.groupId);
 
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
@@ -49,7 +50,7 @@ module.exports = {
     ctx.fillStyle = 'black';
     ctx.fillText(number.toLocaleString().toString(), 802.5, 42.4);
     ctx.fillText(number.toLocaleString().toString(), 864.5, 82.5);
-    ctx.fillText(funds.toString(), 830.5, 105.7);
+    ctx.fillText(balanceing.toString(), 830.5, 105.7);
     ctx.fillText(username.toString(), 61, 35);
     ctx.closePath();
     // const userImage = await loadImage(url.toString());
