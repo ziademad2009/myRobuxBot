@@ -132,7 +132,9 @@ module.exports = {
   done: (role) => `> **done set <@&${role}> as the boost role ✅**`
 },
 getpremium: {
-  boostFirst: `> **you should boost the server to use this command🙄**`
+  boostFirst: `> **you should boost the server to use this command🙄**`,
+  subscribed: `> **You have already subscribed to the premium🙄**`,
+  done: `> **You have subscribed to the premium🥳**`
 }
 
 
