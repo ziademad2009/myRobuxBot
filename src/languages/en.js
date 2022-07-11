@@ -3,7 +3,8 @@ module.exports = {
   general: {
     timeOut: (t) => `> **🙄 - Please wait ${t} seconds!**`,
     noPermissions: (p) => `> **You cannot use this command, because you do not have the following permissions [${p}]!**`,
-    cmdDm: `> **🙄 This command can only be used in DMs!**`
+    cmdDm: `> **🙄 This command can only be used in DMs!**`,
+    premiumOnly: `> **🙄 only premium can use message command**`
   },
   
   help: {
@@ -134,7 +135,8 @@ module.exports = {
 getpremium: {
   boostFirst: `> **you should boost the server to use this command🙄**`,
   subscribed: `> **You have already subscribed to the premium🙄**`,
-  done: `> **You have subscribed to the premium🥳**`
+  done: `> **You have subscribed to the premium🥳**`,
+  colsed: `> **The premium system is currently closed🙄**`
 }
 
 
