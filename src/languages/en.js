@@ -129,7 +129,10 @@ module.exports = {
     done:  (channel) => `> **done set <#${channel}> as logs channel ✅**`
   },
   setboostrole: {
-  done: (role) => `> **done set <@&${role}> as the boost role**`
+  done: (role) => `> **done set <@&${role}> as the boost role ✅**`
+},
+getpremium: {
+  boostFirst: `> **you should boost the server to use this command🙄**`
 }
 
 
