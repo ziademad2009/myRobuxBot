@@ -92,7 +92,8 @@ module.exports = {
     lowFunds: `> **sorry we dont have this amount of robux in group 🙄**`,
     done: (amount, account, balance) => `> **done transfer \`${amount}\` to ${account} and your current account balance is ${balance}**`,
     Receipt: (user, amount) => `${user} bought \`${amount}\`R from the group`,
-    lock: `> **this command is locked now 🙄 **` 
+    lock: `> **this command is locked now 🙄 **` ,
+    boosterReceipt: (user, amount) => `premium ${user}  bought \`${amount}\`R `,
    },
    give: {
     bot: `> **:thinking: bots do not have robux!**`,

@@ -69,7 +69,7 @@ module.exports = {
     ctx.closePath();
     ctx.clip();
     const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
-    if (data1.booster === true) return client.webhook.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
+    if (data1.booster === true) return client.webhook.send({content: replys.boosterReceipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     
     })

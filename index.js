@@ -9,7 +9,7 @@ const discord = require('discord.js');
 const express = require('express');
 const app = express();
 const {db} = require('./src/config');
-const webhookClient = new WebhookClient({ id: process.end.webHookId, token: process.env.webHookToken });
+const webhookClient = new WebhookClient({ id: process.env.webHookId, token: process.env.webHookToken });
 
 
 const client = new Client({
