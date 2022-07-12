@@ -15,9 +15,14 @@ module.exports = {
      await sdb.setGuild(interaction.guild.id);
      const data = await sdb.findOne({guildId: interaction.guild.id});
      const data2 = await db.findOne({userId: interaction.user.id});
+      
      if (!data.boostRole) return interaction.reply({content: replys.colsed}) 
      const boostRole = data.boostRole;
-    if (interaction.member.roles.cache.has(boostRole) && data.booster === true) return interaction.reply({content: replys.subscribed});
+    if (interaction.member.roles.cache.has(boostRole)) {
+        data.booster = true
+      data.save()
+      return interaction.reply({content: replys.subscribed});
+    }
      if (!interaction.member.roles.cache.has(boostRole)) {
        data.booster = false;
        data.save();
