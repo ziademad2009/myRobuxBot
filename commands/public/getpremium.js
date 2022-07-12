@@ -18,21 +18,20 @@ module.exports = {
       
      if (!data.boostRole) return interaction.reply({content: replys.colsed}) 
      const boostRole = data.boostRole;
-    if (interaction.member.roles.cache.has(boostRole)) {
-        data.booster = true
-      data.save()
-      return interaction.reply({content: replys.subscribed});
+      
+    if (!interaction.member.roles.cache.has(boostRole)) {
+      data.booster = false;
+      data.save();
+      return interaction.reply({content: replys.boostFirst});
     }
-     if (!interaction.member.roles.cache.has(boostRole)) {
-       data.booster = false;
-       data.save();
-       return interaction.reply({content: replys.boostFirst}); 
-     };
-     if (interaction.member.roles.cache.has(boostRole)) {
-       data.booster = true;
-       data.save();
-       interaction.reply({content: replys.done})
-     };
+    if (interaction.member.roles.cache.has(boostRole) && data2.booster === true)  return interaction.reply({content: replys.subscribed});
+      
+    if (interaction.member.roles.cache.has(boostRole)) {
+        data2.booster = true
+         data2.save()
+      return interaction.reply({content: replys.done});
+    };
+  
      
  }
 };
