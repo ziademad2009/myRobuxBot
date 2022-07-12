@@ -18,11 +18,11 @@ try{
    await userData.addUser(guildData.groupId, id, `${date}`);
  });
 evt.on('error', async error => {
-console.log('error')
+console.log(error)
 })
 })
 }catch(error) {
-
+ console.log(error)
 }
 console.log('logged to '+result.UserName)
 }).catch(e => {console.log(e), console.log(`login with cookie and group first`)})
