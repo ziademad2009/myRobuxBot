@@ -137,6 +137,9 @@ getpremium: {
   subscribed: `> **You have already subscribed to the premium🙄**`,
   done: `> **You have subscribed to the premium🥳**`,
   colsed: `> **The premium system is currently closed🙄**`
+},
+tax: {
+  isNaN: `> **:interrobang: type the amount you need to calculate! **`
 }
 
 

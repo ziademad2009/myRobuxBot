@@ -41,6 +41,10 @@ module.exports = {
   if (!proochannel) return;
     let balanceing = await nbx.getGroupFunds(data2.groupId);
 
+        let th = await nbx.getPlayerThumbnail(parseInt(user), "jpeg", true, "Headshot").then(async(a) => {
+                  let url = "";
+        a.forEach(avatar => url = avatar.imageUrl);   
+       
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
     const background = await loadImage('https://cdn.glitch.global/38ec7764-1c28-4e4c-a0f5-8f547a4b6781/Picsart_22-06-26_21-26-40-281%5B1%5D.jpg?v=1656946303503');
@@ -53,8 +57,8 @@ module.exports = {
     ctx.fillText(balanceing.toString(), 830.5, 105.7);
     ctx.fillText(username.toString(), 61, 35);
     ctx.closePath();
-    // const userImage = await loadImage(url.toString());
-    // ctx.drawImage(userImage, 11.5,16.5,35,35);
+ const userImage = await loadImage(url.toString());
+    ctx.drawImage(userImage, 11.5,16.5,35,35);
     ctx.beginPath();
     ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
     ctx.strokeStyle = '#fff';
@@ -65,6 +69,8 @@ module.exports = {
     const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
 
     proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]})
+    
+    })
         
 
     }).catch(async e => {
