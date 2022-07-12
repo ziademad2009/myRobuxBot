@@ -5,7 +5,7 @@ module.exports = {
     noPermissions: (p) => `> **You cannot use this command, because you do not have the following permissions [${p}]!**`,
     cmdDm: `> **🙄 This command can only be used in DMs!**`,
     premiumOnly: `> **🙄 only premium can use message command**`,
-    premiumOnly:  `> **🙄 only premium can use this command**`
+    premiumCommandOnly:  `> **🙄 only premium can use this command**`
   },
   
   help: {

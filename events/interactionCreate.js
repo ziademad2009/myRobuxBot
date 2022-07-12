@@ -18,44 +18,26 @@ module.exports = {
         client.languageJson = require('../src/languages/' + client.language);
         client.generalReplys = client.languageJson.general;
         client.cmdReplys = client.languageJson[interaction.commandName];
-
-        try {
-            if (command.cooldown) {
-                if (delay.has(`${command.data.name}-${interaction.user.id}`)) {
-                    return interaction.channel.send(`You can use this command again after **${ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true }).includes('ms') ? '0 second' : ms(delay.get(`${command.data.name}-${interaction.user.id}`) - Date.now(), { long: true })}**`).then(m => {
-                        setTimeout(async () => {
-                            m.delete()
-                        }, 4000)
-                    })
-      
-                }
-
-
-                  if (command.data.name === 'time' || command.data.name === 'player' || command.data.name === 'robuxtax') {
-                   const data = await client.database.users.findOne({userId: interaction.user.id});
-                    if (data.booster === false) {
-                         await interaction.deferReply();
-                       interaction.editReply({content:  client.generalReplys.premiumOnly})
-                      }else await command.execute(interaction, client).catch(e => console.log(e))
-                  }
-                delay.set(`${command.data.name}-${interaction.user.id}`, Date.now() + (command.cooldown * 1000));
-                setTimeout(() => {
-                    delay.delete(`${command.data.name}-${interaction.user.id}`);
-                }, command.cooldown * 1000);
-              
-              
-            } else {
-      
-                await command.execute(interaction, client).catch(e => console.log(e));
-            }
-        } catch (error) {
-            console.log(error);
-//            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        
+        if (delay.has(`${interaction.user.id}-${command.data.name}`)) {
+          await interaction.deferReply({ephemeral: true});
+          return interaction.editReply({content: client.generalReplys.timeOut(command.cooldown || 5)});
         }
-
-
-
-
+        delay.set(`${interaction.user.id}-${command.data.name}`, true);
+        setTimeout(() => {
+         delay.delete(`${interaction.user.id}-${command.data.name}`);
+        },command.cooldown * 1000 || 5 * 1000);
+      
+        if (command.data.name === 'robuxtax' || command.data.name === 'time' || command.data.name === 'player') {
+          await client.database.users.setUser(interaction.user.id);
+          const data = await client.database.users.findOne({userId: interaction.user.id});
+          if (data.booster !== true) {
+            await interaction.deferReply({ephemeral: true})
+          }
+          
+        }
+        
+        await command.execute(interaction, client).catch(e => console.log(e));
  
  
     }
