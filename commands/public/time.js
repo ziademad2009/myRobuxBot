@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('know robux arrive time'),
         
     async execute(interaction, client) {
-
+       
         const replys = client.cmdReplys;
         await interaction.deferReply();
         await client.database.servers.setGuild(interaction.guild.id);

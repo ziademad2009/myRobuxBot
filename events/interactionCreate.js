@@ -31,13 +31,22 @@ module.exports = {
                 }
 
 
-                await command.execute(interaction, client).catch(e => {})
+                  if (command.data.name === 'time' || command.data.name === 'player' || command.data.name === 'robuxtax') {
+                   const data = await client.database.users.findOne({userId: interaction.user.id});
+                    if (data.booster === false) {
+                         await interaction.deferReply();
+                       interaction.editReply({content:  client.generalReplys.premiumOnly})
+                      }else await command.execute(interaction, client).catch(e => console.log(e))
+                  }
                 delay.set(`${command.data.name}-${interaction.user.id}`, Date.now() + (command.cooldown * 1000));
                 setTimeout(() => {
                     delay.delete(`${command.data.name}-${interaction.user.id}`);
                 }, command.cooldown * 1000);
+              
+              
             } else {
-                await command.execute(interaction, client).catch(e => console.log(e))
+      
+                await command.execute(interaction, client).catch(e => console.log(e));
             }
         } catch (error) {
             console.log(error);
