@@ -3,7 +3,6 @@ const { MessageEmbed } = require('discord.js');
 const nbx = require('noblox.js');
 
 module.exports = {
-
     data: new SlashCommandBuilder()
         .setName('time')
         .setDescription('know robux arrive time'),
