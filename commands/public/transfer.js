@@ -60,7 +60,6 @@ module.exports = {
     ctx.fillText(username.toString(), 61, 35);
     ctx.closePath();
     const userImage = await loadImage(url.toString());
-    ctx.drawImage(userImage, 11.5,16.5,35,35);
     ctx.beginPath();
     ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
     ctx.strokeStyle = '#fff';
@@ -68,8 +67,12 @@ module.exports = {
     ctx.stroke();
     ctx.closePath();
     ctx.clip();
+    if (data1.booster === true) {
+       ctx.drawImage(userImage, 11.5,16.5,35,35);
+       const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
+      return client.webhook.send({content: replys.boosterReceipt(`<@!${interaction.user.id}>`, number), files: [attach]});
+    }
     const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
-    if (data1.booster === true) return client.webhook.send({content: replys.boosterReceipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     
     })

@@ -33,10 +33,9 @@ module.exports = {
           const data = await client.database.users.findOne({userId: interaction.user.id});
           if (data.booster !== true) {
             await interaction.deferReply({ephemeral: true})
+            return interaction.editReply({content: client.generalReplys.premiumCommandOnly});
           }
-          
         }
-        
         await command.execute(interaction, client).catch(e => console.log(e));
  
  
