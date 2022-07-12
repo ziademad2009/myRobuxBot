@@ -16,7 +16,7 @@ module.exports = (client) => {
                         client.commandArray.push(commandData.data.toJSON());
                         const guild = await client.guilds.cache.forEach(async(guild) => {
                             await client.guilds.fetch(guild.id);
-                            await guild.commands.create(commandData.data).catch(async e => {})
+                            await guild.commands.create(commandData.data).catch(async e => {console.error})
                         });
                        
                     }
