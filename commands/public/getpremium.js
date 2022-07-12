@@ -19,6 +19,8 @@ module.exports = {
      if (!data.boostRole) return interaction.reply({content: replys.colsed}) 
      const boostRole = data.boostRole;
       
+
+      
     if (!interaction.member.roles.cache.has(boostRole)) {
       data.booster = false;
       data.save();
