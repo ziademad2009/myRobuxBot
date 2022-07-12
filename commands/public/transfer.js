@@ -58,6 +58,9 @@ module.exports = {
     ctx.fillText(balanceing.toString(), 830.5, 105.7);
     ctx.font = "570 15.2px impact";
     ctx.fillText(username.toString(), 61, 35);
+    ctx.font = '10px impact';
+    ctx.fillStyle = 'Gray';
+    (data1.booster === true)? ctx.fillText('premium', 65, 47) : ctx.fillText('Member', 65, 47);
     ctx.closePath();
     const userImage = await loadImage(url.toString());
     ctx.beginPath();
@@ -69,15 +72,9 @@ module.exports = {
     ctx.clip();
     if (data1.booster === true) {
        ctx.drawImage(userImage, 11.5,16.5,35,35);
-       ctx.font = '10px impact';
-       ctx.fillStyle = 'Gray';
-       ctx.fillText('premium', 65, 47);
        const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
       return client.webhook.send({content: replys.boosterReceipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     }else {
-      ctx.font = '10px impact';
-      ctx.fillStyle = 'Gray';
-      ctx.fillText('premium', 65, 47);
      const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
      proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     }
