@@ -4,11 +4,13 @@ const guildsModels = require('./src/models/guilds');
 const userData = require('./src/models/users');
 const {language , embedColor} = require('./src/config');
 const mongoose = require('mongoose');
-const { Client, Collection } = require('discord.js');
+const { Client, Collection , WebhookClient} = require('discord.js');
 const discord = require('discord.js');
 const express = require('express');
 const app = express();
-const {db} = require('./src/config')
+const {db} = require('./src/config');
+const webhookClient = new WebhookClient({ id: process.end.webHookId, token: process.env.webHookToken });
+
 
 const client = new Client({
   allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
@@ -26,6 +28,7 @@ client.database = {
 };
 client.BuyCooldown = new Set();
 client.embedColor = embedColor;
+client.webhook = webhookClient;
 
 const handlers = fs.readdirSync('./handlers').filter(file => file.endsWith('.js'));
 const slashsFolders = fs.readdirSync('./commands');

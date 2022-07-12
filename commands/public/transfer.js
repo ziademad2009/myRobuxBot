@@ -3,6 +3,7 @@ const { MessageEmbed, MessageAttachment } = require('discord.js');
 const nbx = require('noblox.js');
 const { createCanvas, loadImage } = require('canvas');
 
+
 module.exports = {
      cooldown: 15,
     data: new SlashCommandBuilder()
@@ -39,25 +40,26 @@ module.exports = {
 
   const proochannel = await interaction.guild.channels.cache.get(data2.proofchannel);
   if (!proochannel) return;
-    let balanceing = await nbx.getGroupFunds(data2.groupId);
-
-        let th = await nbx.getPlayerThumbnail(parseInt(user), "jpeg", true, "Headshot").then(async(a) => {
-                  let url = "";
-        a.forEach(avatar => url = avatar.imageUrl);   
+  let balanceing = await nbx.getGroupFunds(data2.groupId);
+  let th = await nbx.getPlayerThumbnail(parseInt(user), 420, "png", true, "Headshot").then(async(a) => {
+      let url = "";
+  a.forEach(avatar => url = avatar.imageUrl);   
        
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
     const background = await loadImage('https://cdn.glitch.global/38ec7764-1c28-4e4c-a0f5-8f547a4b6781/Picsart_22-06-26_21-26-40-281%5B1%5D.jpg?v=1656946303503');
     ctx.beginPath();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    ctx.font = '20px sans-serif';
+    ctx.font = '15px impact';
     ctx.fillStyle = 'black';
     ctx.fillText(number.toLocaleString().toString(), 802.5, 42.4);
+    ctx.font = "650 16px impact";
     ctx.fillText(number.toLocaleString().toString(), 864.5, 82.5);
     ctx.fillText(balanceing.toString(), 830.5, 105.7);
+    ctx.font = "570 15.2px impact";
     ctx.fillText(username.toString(), 61, 35);
     ctx.closePath();
- const userImage = await loadImage(url.toString());
+    const userImage = await loadImage(url.toString());
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     ctx.beginPath();
     ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
@@ -67,12 +69,11 @@ module.exports = {
     ctx.closePath();
     ctx.clip();
     const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
-
-    proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]})
+    if (data1.booster === true) return client.webhook.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
+    proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     
     })
         
-
     }).catch(async e => {
         await interaction.editReply({content: replys.newInGroup});console.log(e)
     })
