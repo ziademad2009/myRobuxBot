@@ -47,7 +47,7 @@ module.exports = {
        
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
-    const background = await loadImage('https://cdn.glitch.global/38ec7764-1c28-4e4c-a0f5-8f547a4b6781/Picsart_22-06-26_21-26-40-281%5B1%5D.jpg?v=1656946303503');
+    const background = await loadImage('https://cdn.glitch.global/8e162bb4-d4c3-4bbc-8811-ac29c822a781/pay%20image%201.png?v=1657613444619');
     ctx.beginPath();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.font = '15px impact';
@@ -69,11 +69,20 @@ module.exports = {
     ctx.clip();
     if (data1.booster === true) {
        ctx.drawImage(userImage, 11.5,16.5,35,35);
+       ctx.font = '10px impact';
+       ctx.fillStyle = 'Gray';
+       ctx.fillText('premium', 65, 47);
        const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
       return client.webhook.send({content: replys.boosterReceipt(`<@!${interaction.user.id}>`, number), files: [attach]});
+    }else {
+      ctx.font = '10px impact';
+      ctx.fillStyle = 'Gray';
+      ctx.fillText('premium', 65, 47);
+     const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
+     proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
     }
-    const attach = new MessageAttachment(canvas.toBuffer(), 'payout.png');
-    proochannel.send({content: replys.Receipt(`<@!${interaction.user.id}>`, number), files: [attach]});
+ 
+
     
     })
         
