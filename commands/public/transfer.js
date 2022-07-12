@@ -31,8 +31,8 @@ module.exports = {
      await nbx.getGroups(user).then(async result => await result.forEach(group => groups.push(group.Id)));
      if (!groups.includes(data2.groupId)) return await interaction.editReply({content: replys.notInGroup});
      let funds = await nbx.getGroupFunds(data2.groupId);
-     if (funds < number) return await interaction.editReply({content: replys.lowFunds})
-     await nbx.groupPayout(data2.groupId, user , number).then(async() => {
+     // if (funds < number) return await interaction.editReply({content: replys.lowFunds})
+     // await nbx.groupPayout(data2.groupId, user , number).then(async() => {
      data1.coins -= number;
      data1.save();
      let embed = new MessageEmbed().setColor(client.embedColor).setDescription(replys.done(number, username, data1.coins))
@@ -83,9 +83,9 @@ module.exports = {
     
     })
         
-    }).catch(async e => {
-        await interaction.editReply({content: replys.newInGroup});console.log(e)
-    })
+  //  }).catch(async e => {
+    //    await interaction.editReply({content: replys.newInGroup});console.log(e)
+    //})
     }).catch(e => interaction.editReply({content: replys.notWorkNow}));
     }).catch(e => interaction.editReply({content: replys.notWorkNow}));
     }).catch(e => interaction.editReply({content: replys.notFoundInRoblox}));
